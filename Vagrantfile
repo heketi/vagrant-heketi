@@ -7,7 +7,8 @@ DISKS = 4
 
 Vagrant.configure("2") do |config|
     config.vm.box = "chef/centos-7.1"
-    config.vbguest.auto_update = false
+    config.ssh.insert_key = false
+    #config.vbguest.auto_update = false
 
     (0..NODES-1).each do |i|
         config.vm.define "storage#{i}" do |storage|
