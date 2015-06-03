@@ -32,13 +32,3 @@ Vagrant.configure("2") do |config|
     end
 end
 
-
-#- name: install glusterfs
-#  yum: name={{ item }} state=present
-#  with_items:
-#    - glusterfs-cli
-#    - glusterfs-libs
-#    - glusterfs
-#    - glusterfs-fuse
-#    - glusterfs-api
-

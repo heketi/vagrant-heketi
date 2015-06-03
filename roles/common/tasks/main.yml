@@ -1,2 +1,5 @@
 - name: Setup network
   command: ifup enp0s8
+
+- name: setup epel
+  command: yum -y install http://mirror.clarkson.edu/epel/7/x86_64/e/epel-release-7-5.noarch.rpm creates=/etc/yum.repos.d/epel.repo
