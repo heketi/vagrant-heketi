@@ -29,9 +29,6 @@ Vagrant.configure("2") do |config|
     config.vm.provision :ansible do |ansible|
         ansible.limit = "all"
         ansible.playbook = "site.yml"
-        #ansible.groups = {
-        #    "gfsm" => (0..NODES-1).map {|n| "storage#{n}"}
-        #}
     end
 end
 
