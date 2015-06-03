@@ -1,0 +1,12 @@
+- name: check physical group exists
+  shell: pvscan | grep sdb > /dev/null 2>&1
+  register: pvstatus
+  ignore_errors: True
+
+- name: setup physical group 
+  command: pvcreate /dev/sdb /dev/sdc /dev/sdd /dev/sde
+  when: pvstatus.rc != 0
+
+- name: setup gfsm volume group
+  lvg: vg=gfsm pvs=/dev/sdb,/dev/sdc,/dev/sdd,/dev/sde
+

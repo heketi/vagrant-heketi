@@ -24,10 +24,24 @@ Vagrant.configure("2") do |config|
         end
     end
 
-  # View the documentation for the provider you're using for more
-  # information on available options.
-  #config.vm.provision :ansible do |ansible|
-  #  ansible.limit = "all"
-  #  ansible.playbook = "site.yml"
-  #end
+    # View the documentation for the provider you're using for more
+    # information on available options.
+    config.vm.provision :ansible do |ansible|
+        ansible.limit = "all"
+        ansible.playbook = "site.yml"
+        #ansible.groups = {
+        #    "gfsm" => (0..NODES-1).map {|n| "storage#{n}"}
+        #}
+    end
 end
+
+
+#- name: install glusterfs
+#  yum: name={{ item }} state=present
+#  with_items:
+#    - glusterfs-cli
+#    - glusterfs-libs
+#    - glusterfs
+#    - glusterfs-fuse
+#    - glusterfs-api
+
