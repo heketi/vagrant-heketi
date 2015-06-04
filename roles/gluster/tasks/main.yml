@@ -9,17 +9,20 @@
 - name: disable selinux
   selinux: state=disabled
 
+- name: remove iptable rules
+  command: iptables -F
+
 - name: start glusterd
   service: name=glusterd state=started enabled=yes
 
 - name: Add storage0 to hosts file
-  lineinfile: dest=/etc/hosts regexp='^192\.168\.10\.100' line='192.168.10.100 gfsm_storage0' owner=root group=root mode=0644
+  lineinfile: dest=/etc/hosts regexp='^192\.168\.10\.100' line='192.168.10.100 gfsm.storage0' owner=root group=root mode=0644
 
 - name: Add storage1 to hosts file
-  lineinfile: dest=/etc/hosts regexp='^192\.168\.10\.101' line='192.168.10.101 gfsm_storage1' owner=root group=root mode=0644
+  lineinfile: dest=/etc/hosts regexp='^192\.168\.10\.101' line='192.168.10.101 gfsm.storage1' owner=root group=root mode=0644
 
 - name: Add storage2 to hosts file
-  lineinfile: dest=/etc/hosts regexp='^192\.168\.10\.102' line='192.168.10.102 gfsm_storage2' owner=root group=root mode=0644
+  lineinfile: dest=/etc/hosts regexp='^192\.168\.10\.102' line='192.168.10.102 gfsm.storage2' owner=root group=root mode=0644
 
 - name: Add storage3 to hosts file
-  lineinfile: dest=/etc/hosts regexp='^192\.168\.10\.103' line='192.168.10.103 gfsm_storage3' owner=root group=root mode=0644
+  lineinfile: dest=/etc/hosts regexp='^192\.168\.10\.103' line='192.168.10.103 gfsm.storage3' owner=root group=root mode=0644
