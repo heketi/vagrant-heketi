@@ -1,25 +1,8 @@
-- name: enable glusterfs repo
-  shell: wget -P /etc/yum.repos.d http://download.gluster.org/pub/gluster/glusterfs/LATEST/EPEL.repo/glusterfs-epel.repo creates=/etc/yum.repos.d/glusterfs-epel.repo
-
 - name: install glusterfs
   yum: name={{ item }} state=present
   with_items:
     - glusterfs-server
 
-- name: disable selinux
-  selinux: state=disabled
-
 - name: start glusterd
   service: name=glusterd state=started enabled=yes
 
-- name: Add storage0 to hosts file
-  lineinfile: dest=/etc/hosts regexp='^192\.168\.10\.100' line='192.168.10.100 gfsm_storage0' owner=root group=root mode=0644
-
-- name: Add storage1 to hosts file
-  lineinfile: dest=/etc/hosts regexp='^192\.168\.10\.101' line='192.168.10.101 gfsm_storage1' owner=root group=root mode=0644
-
-- name: Add storage2 to hosts file
-  lineinfile: dest=/etc/hosts regexp='^192\.168\.10\.102' line='192.168.10.102 gfsm_storage2' owner=root group=root mode=0644
-
-- name: Add storage3 to hosts file
-  lineinfile: dest=/etc/hosts regexp='^192\.168\.10\.103' line='192.168.10.103 gfsm_storage3' owner=root group=root mode=0644

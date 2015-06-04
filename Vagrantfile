@@ -8,8 +8,18 @@ DISKS = 4
 Vagrant.configure("2") do |config|
     config.vm.box = "chef/centos-7.1"
     config.ssh.insert_key = false
-    #config.vbguest.auto_update = false
 
+    # Make the client
+    config.vm.define :client do |client|
+        client.vm.network :private_network, ip: "192.168.10.90"
+        client.vm.host_name = "client"
+        client.vm.provider :virtualbox do |vb|
+            vb.memory = 1024
+            vb.cpus = 2
+        end
+    end
+
+    # Make the glusterfs cluster, each with DISKS number of drives
     (0..NODES-1).each do |i|
         config.vm.define "storage#{i}" do |storage|
             storage.vm.hostname = "storage#{i}"
@@ -29,6 +39,10 @@ Vagrant.configure("2") do |config|
                 storage.vm.provision :ansible do |ansible|
                     ansible.limit = "all"
                     ansible.playbook = "site.yml"
+                    ansible.groups = {
+                        "client" => ["client"],
+                        "gluster" => (0..NODES-1).map {|j| "storage#{j}"},
+                    }
                 end
             end
         end

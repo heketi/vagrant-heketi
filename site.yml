@@ -2,5 +2,14 @@
   sudo: True
   roles:
     - common
+
+- hosts: client
+  sudo: True
+  roles:
+    - gluster_client
+
+- hosts: gluster
+  sudo: True
+  roles:
     - gfsm
     - gluster
