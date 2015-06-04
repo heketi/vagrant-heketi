@@ -10,18 +10,3 @@
 - name: setup gfsm volume group
   lvg: vg=gfsm pvs=/dev/sdb,/dev/sdc,/dev/sdd,/dev/sde
 
-# Example of how to create a volume
-#- name: create vol1 of 10GB
-#  lvol: vg=gfsm lv=vol1 size=10g
-#
-#- name: format vol1
-#  filesystem: fstype=xfs dev=/dev/gfsm/vol1
-#
-#- name: create /gluster
-#  file: path=/gluster state=directory mode=0755
-#
-#- name: create /gluster/vol1
-#  file: path=/gluster/vol1 state=directory mode=0755
-#
-#- name: mount vol1 on /gluster/vol1
-#  mount: name=/gluster/vol1 src=/dev/gfsm/vol1 opts=noatime,nodiratime,inode64 state=mounted fstype=xfs
