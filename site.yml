@@ -11,5 +11,4 @@
 - hosts: gluster
   sudo: True
   roles:
-    - gfsm
     - gluster

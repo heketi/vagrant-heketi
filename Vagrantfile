@@ -3,7 +3,7 @@
 #
 
 NODES = 4
-DISKS = 4
+DISKS = 8
 
 Vagrant.configure("2") do |config|
     config.vm.box = "chef/centos-7.1"
