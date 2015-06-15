@@ -41,6 +41,7 @@ Vagrant.configure("2") do |config|
                     ansible.playbook = "site.yml"
                     ansible.groups = {
                         "client" => ["client"],
+                        "heketi" => ["storage0"],
                         "gluster" => (0..NODES-1).map {|j| "storage#{j}"},
                     }
                 end

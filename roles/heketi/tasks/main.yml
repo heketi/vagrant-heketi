@@ -1,0 +1,5 @@
+- name: Copy heketi to storage0
+  copy: src=heketi owner=vagrant group=vagrant dest=/home/vagrant force=yes mode=755
+
+- name: copy private key
+  copy: src=insecure_private_key owner=vagrant group=vagrant dest=/home/vagrant force=yes

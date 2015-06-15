@@ -12,3 +12,7 @@
   sudo: True
   roles:
     - gluster
+
+- hosts: heketi
+  roles:
+    - heketi
