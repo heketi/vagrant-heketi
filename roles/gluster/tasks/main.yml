@@ -9,3 +9,5 @@
 - name: make /gluster directory
   file: path=/gluster state=directory
 
+- name: remove all lvs
+  shell: for i in `sudo lvs | grep "g tp_" | awk '{print $2 "/" $5}'` ; do sudo lvremove -f $i ; done
