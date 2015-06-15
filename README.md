@@ -1,5 +1,5 @@
 # Heketi Demo
-This vagrant-ansible script creates a setup for Heketi to manage GlusterFS.  It creates four VMs (storage0,storage1,storage2,storage3) with eight 500 GB drives each for Heketi to create GlusterFS volumes.  The ansible script only installs the necessary dependencies on each of the VMs. It lets Heketi manage the raw disks.  The script also crease a client (client0) to demo mounting the volume created by Heketi.
+This vagrant-ansible script creates a setup for Heketi to manage GlusterFS.  It creates four VMs (storage0,storage1,storage2,storage3) with eight 500 GB drives each for Heketi to create GlusterFS volumes.  The ansible script only installs the necessary dependencies on each of the VMs. It lets Heketi manage the raw disks.  The script also creates a client VM to demo mounting the volume created by Heketi.
 
 # Requisites
 * You will need Virtualbox, Vagrant, and ansible installed on your system.
