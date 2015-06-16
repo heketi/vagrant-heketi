@@ -126,7 +126,7 @@ Notice the _id_ in the _Request Body (Highlight)_. Copy the id
 
 Delete the volume by using the following command:
 
-* Method: _DELETE_ URL: http://192.168.10.100:8080/volumes{id of volume}
+* Method: _DELETE_ URL: `http://192.168.10.100:8080/volumes/<id of volume>`
 
 Notice that the storage has been returned to the cluster by looking at the devices in:
 
