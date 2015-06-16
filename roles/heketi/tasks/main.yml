@@ -1,5 +1,17 @@
 - name: Copy heketi to storage0
-  copy: src=heketi owner=vagrant group=vagrant dest=/home/vagrant force=yes mode=755
+  copy: src={{ item }} owner=vagrant group=vagrant dest=/home/vagrant force=yes mode=755
+  with_items:
+    - heketi
+    - ring.py
 
 - name: copy private key
   copy: src=insecure_private_key owner=vagrant group=vagrant dest=/home/vagrant force=yes
+
+- name: add RDO
+  command: yum -y install https://repos.fedorapeople.org/repos/openstack/openstack-kilo/rdo-release-kilo-1.noarch.rpm creates=/etc/yum.repos.d/rdo-release.repo
+
+- name: install OpenStack Swift
+  yum: name={{ item }} state=present
+  with_items:
+    - openstack-swift
+
