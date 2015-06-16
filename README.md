@@ -37,7 +37,7 @@ First thing you need to do is tell Heketi about the cluster.  You will tell Heke
     * storage2 - 192.168.10.102
     * storage3 - 192.168.10.103
 
-1. Method: _POST_ URL: http://192.168.10.100:8080/nodes
+1. Method: _POST_ URL: `http://192.168.10.100:8080/nodes`
 1. In the *Body* copy and paste the following:
 
 ```
@@ -71,7 +71,7 @@ Now we will add devices Heketi can use on this node:
 
 Once you have finished, you can view the cluster by doing the following:
 
-* Method: _GET_  URL: http://192.168.10.100:8080/nodes
+* Method: _GET_  URL: `http://192.168.10.100:8080/nodes`
 
 
 ## Create a volume
@@ -80,7 +80,7 @@ Now we let Heketi determine where to place the bricks and create our volume.
 
 > NOTE: Heketi algorithm today is currently not very smart.  We plan on using OpenStack Swift's Ring algorithm to determine the object, I mean, brick placements in the cluster.
 
-* Method: _POST_  URL: http://192.168.10.100:8080/volumes
+* Method: _POST_  URL: `http://192.168.10.100:8080/volumes`
 * Type the following in the *Body*
 
 ```
@@ -93,11 +93,11 @@ Now we let Heketi determine where to place the bricks and create our volume.
 
 If you miss the information, you can see it again by typing:
 
-* Method: _GET_  URL: http://192.168.10.100:8080/volumes
+* Method: _GET_  URL: `http://192.168.10.100:8080/volumes`
 
 Notice that storage has been borrowed from the cluster by looking at the devices in:
 
-* Method: _GET_  URL: http://192.168.10.100:8080/nodes
+* Method: _GET_  URL: `http://192.168.10.100:8080/nodes`
 
 ## Mounting the volume
 
@@ -120,7 +120,7 @@ $ sudo umount /gluster
 
 Get the _id_ of the volume to delete:
 
-* Method: _GET_  URL: http://192.168.10.100:8080/volumes
+* Method: _GET_  URL: `http://192.168.10.100:8080/volumes`
 
 Notice the _id_ in the _Request Body (Highlight)_. Copy the id
 
@@ -130,7 +130,7 @@ Delete the volume by using the following command:
 
 Notice that the storage has been returned to the cluster by looking at the devices in:
 
-* Method: _GET_  URL: http://192.168.10.100:8080/nodes
+* Method: _GET_  URL: `http://192.168.10.100:8080/nodes`
 
 
  
