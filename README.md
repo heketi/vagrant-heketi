@@ -2,7 +2,7 @@
 This vagrant-ansible script creates a setup for Heketi to manage GlusterFS.  It creates four VMs (storage0,storage1,storage2,storage3) with eight 500 GB drives each for Heketi to create GlusterFS volumes.  The ansible script only installs the necessary dependencies on each of the VMs. It lets Heketi manage the raw disks.  The script also creates a client VM to demo mounting the volume created by Heketi.
 
 # Requisites
-* You will need Virtualbox, Vagrant, and ansible installed on your system.
+* You will need Virtualbox, Vagrant, and Ansible installed on your system.
 * Virtualbox must have a host network interface ip of 192.168.10.1
 * Must have Firefox RESTclient installed
     * Go to _Add-ons_ on the Firefox menu
@@ -27,15 +27,17 @@ $ exit
 # Demo
 
 ## Cluster
-First thing we need to do is tell Heketi about the cluster.  To do, we will tell Heketi which nodes and which drives to use.  All of the following commands will refer to the Firefox RESTclient.
+First thing you need to do is tell Heketi about the cluster.  You will tell Heketi which nodes and which drives to use.
 
-* Do the following for each ip of each storage node:
+> NOTE: All of the following commands refer to the Firefox RESTclient.
+
+* You will need to register each storage nodes:
     * storage0 - 192.168.10.100
     * storage1 - 192.168.10.101
     * storage2 - 192.168.10.102
     * storage3 - 192.168.10.103
 
-1. Method: _POST_ URL: http://192.168.10.100:8080/nodes
+1. Method: _POST_ URL: `http://192.168.10.100:8080/nodes`
 1. In the *Body* copy and paste the following:
 
 ```
@@ -52,9 +54,9 @@ For example:
 
 * In the _Response Body (Highlight)_ notice the _id_.  Copy the id to the clipboard.
 
-Now we will add devices to this node:
+Now we will add devices Heketi can use on this node:
 
-* Method: _POST_ URL: http://192.168.10.100:8080/nodes/<paste id>/devices
+* Method: _POST_ URL: `http://192.168.10.100:8080/nodes/<paste id>/devices`
 * In the body, you will tell Heketi which drives to use.  Copy and paste the following to the *Body*
 
 ```
@@ -63,13 +65,13 @@ Now we will add devices to this node:
 
 > NOTE: _Weight_ is not used yet.
 
-* Notice the status code of `201 Created` in the _Response Headers_ tab.  Here Heketi went into the system and initialized the disks use LVM.
+* Notice the status code of `201 Created` in the _Response Headers_ tab.  Here Heketi went into the system and initialized the disks to be managed by LVM.
 
 * Now repeat for the other IP addresses.
 
 Once you have finished, you can view the cluster by doing the following:
 
-* Method: _GET_  URL: http://192.168.10.100:8080/nodes
+* Method: _GET_  URL: `http://192.168.10.100:8080/nodes`
 
 
 ## Create a volume
@@ -78,7 +80,7 @@ Now we let Heketi determine where to place the bricks and create our volume.
 
 > NOTE: Heketi algorithm today is currently not very smart.  We plan on using OpenStack Swift's Ring algorithm to determine the object, I mean, brick placements in the cluster.
 
-* Method: _POST_  URL: http://192.168.10.100:8080/volumes
+* Method: _POST_  URL: `http://192.168.10.100:8080/volumes`
 * Type the following in the *Body*
 
 ```
@@ -91,11 +93,11 @@ Now we let Heketi determine where to place the bricks and create our volume.
 
 If you miss the information, you can see it again by typing:
 
-* Method: _GET_  URL: http://192.168.10.100:8080/volumes
+* Method: _GET_  URL: `http://192.168.10.100:8080/volumes`
 
 Notice that storage has been borrowed from the cluster by looking at the devices in:
 
-* Method: _GET_  URL: http://192.168.10.100:8080/nodes
+* Method: _GET_  URL: `http://192.168.10.100:8080/nodes`
 
 ## Mounting the volume
 
@@ -118,17 +120,17 @@ $ sudo umount /gluster
 
 Get the _id_ of the volume to delete:
 
-* Method: _GET_  URL: http://192.168.10.100:8080/volumes
+* Method: _GET_  URL: `http://192.168.10.100:8080/volumes`
 
 Notice the _id_ in the _Request Body (Highlight)_. Copy the id
 
 Delete the volume by using the following command:
 
-* Method: _DELETE_ URL: http://192.168.10.100:8080/volumes/<id of volume>
+* Method: _DELETE_ URL: `http://192.168.10.100:8080/volumes/<id of volume>`
 
 Notice that the storage has been returned to the cluster by looking at the devices in:
 
-* Method: _GET_  URL: http://192.168.10.100:8080/nodes
+* Method: _GET_  URL: `http://192.168.10.100:8080/nodes`
 
 
  
