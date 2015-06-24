@@ -78,7 +78,7 @@ Once you have finished, you can view the cluster by doing the following:
 
 Now we let Heketi determine where to place the bricks and create our volume.
 
-> NOTE: Heketi algorithm today is currently not very smart.  We plan on using OpenStack Swift's Ring algorithm to determine the object, I mean, brick placements in the cluster.
+> NOTE: Heketi uses OpenStack Swift's Ring algorithm to determine the object, I mean, brick placements in the cluster.
 
 * Method: _POST_  URL: `http://192.168.10.100:8080/volumes`
 * Type the following in the *Body*
