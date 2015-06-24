@@ -3,6 +3,8 @@
   with_items:
     - heketi
     - ring.py
+    - heketi_cluster_setup.py
+    - heketi_deleteall_volumes.py
 
 - name: copy private key
   copy: src=insecure_private_key owner=vagrant group=vagrant dest=/home/vagrant force=yes
