@@ -1,5 +1,5 @@
 # Heketi Demo
-This vagrant-ansible script creates a setup for Heketi to manage GlusterFS.  It creates four VMs (storage0,storage1,storage2,storage3) with eight 500 GB drives each for Heketi to create GlusterFS volumes.  The ansible script only installs the necessary dependencies on each of the VMs. It lets Heketi manage the raw disks.  The script also creates a client VM to demo mounting the volume created by Heketi.
+This vagrant-ansible script creates a setup for Heketi to manage GlusterFS.  It creates four VMs (storage0,storage1,storage2,storage3) with eight 500 GB drives each.  The ansible script only installs gluster-server on each of the storage servers and then enables the gluster service.  It does not create or initilize any of the disks.  The disks will later be managed by Heketi.  The script also creates a client VM to demo mounting the volume created by Heketi.
 
 # Requisites
 * You will need Virtualbox, Vagrant, and Ansible installed on your system.
@@ -26,7 +26,7 @@ $ exit
 
 # Demo
 
-## Cluster
+## Setting up the cluster topology
 First thing you need to do is tell Heketi about the cluster.  You will tell Heketi which nodes and which drives to use.
 
 > NOTE: All of the following commands refer to the Firefox RESTclient.
@@ -50,7 +50,7 @@ For example:
 { "name" : "192.168.10.100", "zone": "1" }
 ```
 
-> NOTE: Zone is not used yet.
+> NOTE: Zone is refers to failure domains.
 
 * In the _Response Body (Highlight)_ notice the _id_.  Copy the id to the clipboard.
 
@@ -63,7 +63,7 @@ Now we will add devices Heketi can use on this node:
 { "devices": [ { "name" : "/dev/sdb", "weight" : 100 }, { "name" : "/dev/sdc", "weight" : 100 }, { "name" : "/dev/sdd", "weight" : 100 }, { "name" : "/dev/sde", "weight" : 100 }, { "name" : "/dev/sdf", "weight" : 100 }, { "name" : "/dev/sdg", "weight" : 100 }, { "name" : "/dev/sdh", "weight" : 100 }, { "name" : "/dev/sdi", "weight" : 100 } ] }
 ```
 
-> NOTE: _Weight_ is not used yet.
+> NOTE: _Weight_ is the relative weight of the device in comparison to other devices.  For more inforation please read [OpenStack Swift's Ring Documentation](http://docs.openstack.org/developer/swift/overview_ring.html#list-of-devices)
 
 * Notice the status code of `201 Created` in the _Response Headers_ tab.  Here Heketi went into the system and initialized the disks to be managed by LVM.
 
