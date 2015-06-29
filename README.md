@@ -47,7 +47,7 @@ First thing you need to do is tell Heketi about the cluster.  You will tell Heke
 For example:
 
 ```
-{ "name" : "192.168.10.100", "zone": "1" }
+{ "name" : "192.168.10.100", "zone": 1 }
 ```
 
 > NOTE: Zone is refers to failure domains.
