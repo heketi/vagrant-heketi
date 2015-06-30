@@ -2,8 +2,13 @@
 This vagrant-ansible script creates a setup for Heketi to manage GlusterFS.  It creates four VMs (storage0,storage1,storage2,storage3) with eight 500 GB drives each.  The ansible script only installs gluster-server on each of the storage servers and then enables the gluster service.  It does not create or initilize any of the disks.  The disks will later be managed by Heketi.  The script also creates a client VM to demo mounting the volume created by Heketi.
 
 # Requisites
-* You will need Virtualbox, Vagrant, and Ansible installed on your system.
+* You will need Virtualbox or libvirt, Vagrant, and Ansible installed on your system.
 * Virtualbox must have a host network interface ip of 192.168.10.1
+* To use libvirt provider, you need ``vagrant-mutate`` Vagrant plugin. This is required to
+  be able to use the same box name for both providers in Vagrant file. The following steps need to be performed,
+    * ``vagrant plugin install vagrant-mutate``
+    * ``vagrant box add "chef/centos-7.1"``, if the box isn't already added.
+    * ``vagrant mutate chef/centos-7.1 libvirt``
 * Must have Firefox RESTclient installed
     * Go to _Add-ons_ on the Firefox menu
     * Search and install RESTclient
