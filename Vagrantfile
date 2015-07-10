@@ -6,8 +6,8 @@ NODES = 4
 DISKS = 8
 
 Vagrant.configure("2") do |config|
-    config.vm.box = "chef/centos-7.1"
     config.ssh.insert_key = false
+    config.vm.box = "chef/centos-7.1"
 
     # Make the client
     config.vm.define :client do |client|
@@ -17,6 +17,12 @@ Vagrant.configure("2") do |config|
             vb.memory = 1024
             vb.cpus = 2
         end
+
+        client.vm.provider :libvirt do |lv|
+            lv.memory = 1024
+            lv.cpus = 2
+        end
+
     end
 
     # Make the glusterfs cluster, each with DISKS number of drives
@@ -31,6 +37,11 @@ Vagrant.configure("2") do |config|
                     vb.memory = 1024
                     vb.cpus = 2
                 end
+                storage.vm.provider :libvirt do  |lv|
+                    lv.storage :file => "disk-#{i}-#{d}.vdi", :size => 500*1024, :type =>"hdd"
+                    lv.memory = 1024
+                    lv.cpus =2
+                end
             end
 
             if i == (NODES-1)
@@ -44,6 +55,12 @@ Vagrant.configure("2") do |config|
                         "heketi" => ["storage0"],
                         "gluster" => (0..NODES-1).map {|j| "storage#{j}"},
                     }
+                    storage.vm.provider :virtualbox do
+                            ansible.extra_vars = {provider: "virtualbox"}
+                    end
+                    storage.vm.provider :libvirt do
+                            ansible.extra_vars = {provider: "libvirt"}
+                    end
                 end
             end
         end
