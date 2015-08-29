@@ -3,11 +3,11 @@
 #
 
 NODES = 4
-DISKS = 8
+DISKS = 12
 
 Vagrant.configure("2") do |config|
     config.ssh.insert_key = false
-    config.vm.box = "chef/centos-7.1"
+    config.vm.box = "centos/7"
 
     # Make the client
     config.vm.define :client do |client|
@@ -37,8 +37,9 @@ Vagrant.configure("2") do |config|
                     vb.memory = 1024
                     vb.cpus = 2
                 end
+                driverletters = ('b'..'z').to_a
                 storage.vm.provider :libvirt do  |lv|
-                    lv.storage :file => "disk-#{i}-#{d}.vdi", :size => 500*1024, :type =>"hdd"
+                    lv.storage :file, :device => "vd#{driverletters[d]}", :path => "disk-#{i}-#{d}.disk", :size => '500G'
                     lv.memory = 1024
                     lv.cpus =2
                 end
@@ -64,7 +65,6 @@ Vagrant.configure("2") do |config|
                 end
             end
         end
-
     end
 end
 
