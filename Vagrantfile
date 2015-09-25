@@ -3,11 +3,18 @@
 #
 
 NODES = 4
-DISKS = 12
+DISKS = 8
 
 Vagrant.configure("2") do |config|
     config.ssh.insert_key = false
-    config.vm.box = "centos/7"
+
+    config.vm.provider :libvirt do |v,override|
+        override.vm.box = "centos/7"
+        override.vm.synced_folder '.', '/home/vagrant/sync', disabled: true
+    end
+    config.vm.provider :virtualbox do |v|
+        config.vm.box = "bento/centos-7.1"
+    end
 
     # Make the client
     config.vm.define :client do |client|
@@ -56,12 +63,6 @@ Vagrant.configure("2") do |config|
                         "heketi" => ["storage0"],
                         "gluster" => (0..NODES-1).map {|j| "storage#{j}"},
                     }
-                    storage.vm.provider :virtualbox do
-                            ansible.extra_vars = {provider: "virtualbox"}
-                    end
-                    storage.vm.provider :libvirt do
-                            ansible.extra_vars = {provider: "libvirt"}
-                    end
                 end
             end
         end

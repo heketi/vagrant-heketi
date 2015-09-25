@@ -1,7 +1,3 @@
-- name: Setup network
-  command: ifup enp0s8
-  when: provider == "virtualbox"
-
 - name: setup epel
   command: yum -y install http://mirror.clarkson.edu/epel/7/x86_64/e/epel-release-7-5.noarch.rpm creates=/etc/yum.repos.d/epel.repo
 
@@ -21,18 +17,3 @@
 
 - name: disable selinux
   selinux: state=disabled
-
-- name: Add client to hosts file
-  lineinfile: dest=/etc/hosts regexp='^192\.168\.10\.90' line='192.168.10.90 client' owner=root group=root mode=0644
-
-- name: Add storage0 to hosts file
-  lineinfile: dest=/etc/hosts regexp='^192\.168\.10\.100' line='192.168.10.100 storage0' owner=root group=root mode=0644
-
-- name: Add storage1 to hosts file
-  lineinfile: dest=/etc/hosts regexp='^192\.168\.10\.101' line='192.168.10.101 storage1' owner=root group=root mode=0644
-
-- name: Add storage2 to hosts file
-  lineinfile: dest=/etc/hosts regexp='^192\.168\.10\.102' line='192.168.10.102 storage2' owner=root group=root mode=0644
-
-- name: Add storage3 to hosts file
-  lineinfile: dest=/etc/hosts regexp='^192\.168\.10\.103' line='192.168.10.103 storage3' owner=root group=root mode=0644
