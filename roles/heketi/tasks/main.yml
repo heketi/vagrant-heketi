@@ -1,4 +1,4 @@
-- name: wget heketi 1.1.0
+- name: wget heketi
   shell: wget -P /home/vagrant https://github.com/heketi/heketi/releases/download/1.0.0/heketi-1.0.0.linux.amd64.tar.gz creates=/home/vagrant/heketi-1.0.0.linux.amd64.tar.gz
 
 - name: untar heketi
