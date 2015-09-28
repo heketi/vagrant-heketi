@@ -1,8 +1,14 @@
-- name: Copy files to storage0
-  copy: src={{ item }} owner=vagrant group=vagrant dest=/home/vagrant force=yes mode=755
-  with_items:
-    - heketi_cluster_setup.py
-    - heketi_deleteall_volumes.py
+- name: wget heketi 1.1.0
+  shell: wget -P /home/vagrant https://github.com/heketi/heketi/releases/download/1.0.0/heketi-1.0.0.linux.amd64.tar.gz creates=/home/vagrant/heketi-1.0.0.linux.amd64.tar.gz
+
+- name: untar heketi
+  unarchive: src=/home/vagrant/heketi-1.0.0.linux.amd64.tar.gz dest=/home/vagrant copy=no
 
 - name: copy private key
-  copy: src=insecure_private_key owner=vagrant group=vagrant dest=/home/vagrant force=yes
+  copy: src=insecure_private_key owner=vagrant group=vagrant dest=/home/vagrant/heketi force=yes mode=600
+
+- name: copy files
+  copy: src={{ item }} owner=vagrant group=vagrant dest=/home/vagrant/heketi force=yes mode=755
+  with_items:
+    - heketi.json
+    - topology.json
