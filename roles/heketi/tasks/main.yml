@@ -8,7 +8,8 @@
   copy: src=insecure_private_key owner=vagrant group=vagrant dest=/home/vagrant/heketi force=yes mode=600
 
 - name: copy files
-  copy: src={{ item }} owner=vagrant group=vagrant dest=/home/vagrant/heketi force=yes mode=755
+  copy: src={{ item }} owner=vagrant group=vagrant dest=/home/vagrant/heketi force=yes mode=644
   with_items:
     - heketi.json
-    - topology.json
+    - topology_libvirt.json
+    - topology_virtualbox.json

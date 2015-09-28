@@ -63,6 +63,7 @@ Vagrant.configure("2") do |config|
                         "heketi" => ["storage0"],
                         "gluster" => (0..NODES-1).map {|j| "storage#{j}"},
                     }
+
                 end
             end
         end
