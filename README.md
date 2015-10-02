@@ -42,3 +42,6 @@ $ ./heketi-cli volume create -size=100
 # More information
 * See the command line help screen by typing: `./heketi-cli -h`
 * Please see the [API](https://github.com/heketi/heketi/wiki/API) for REST commands.
+
+# Screencast
+[![demo](https://i.vimeocdn.com/video/537600798_640.jpg)](https://vimeo.com/140874175)
