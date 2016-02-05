@@ -24,10 +24,10 @@
 		"executor" : "ssh",
 
 		"_db_comment": "Database file name",
-		"db" : "heketi.db",
+		"db" : "/var/lib/heketi/heketi.db",
 
 		"sshexec" : {
-            "keyfile" : "/home/vagrant/heketi/insecure_private_key",
+            "keyfile" : "/etc/heketi/insecure_private_key",
             "user" : "vagrant"
         }
 	}

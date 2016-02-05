@@ -1,14 +1,13 @@
-- name: wget heketi
-  shell: wget -P /home/vagrant https://github.com/heketi/heketi/releases/download/1.0.1/heketi-1.0.1.linux.amd64.tar.gz creates=/home/vagrant/heketi-1.0.1.linux.amd64.tar.gz
-
-- name: untar heketi
-  unarchive: src=/home/vagrant/heketi-1.0.1.linux.amd64.tar.gz dest=/home/vagrant copy=no
+- name: install heketi
+  yum: name={{ item }} state=present
+  with_items:
+    - heketi
 
 - name: copy private key
-  copy: src=insecure_private_key owner=vagrant group=vagrant dest=/home/vagrant/heketi force=yes mode=600
+  copy: src=insecure_private_key owner=heketi group=heketi dest=/etc/heketi/insecure_private_key force=yes mode=600
 
 - name: copy files
-  copy: src={{ item }} owner=vagrant group=vagrant dest=/home/vagrant/heketi force=yes mode=644
+  copy: src={{ item }} owner=vagrant group=vagrant dest=/home/vagrant force=yes mode=644
   with_items:
     - heketi.json
     - topology_libvirt.json
