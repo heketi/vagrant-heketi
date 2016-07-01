@@ -15,17 +15,16 @@ This vagrant-ansible script creates a setup for Heketi to manage GlusterFS.  It 
 
 ```
 $ vagrant ssh storage0
-$ cd heketi
-$ ./heketi -config=heketi.json 
+$ sudo cp heketi.json /etc/heketi
+$ sudo service heketi start
+$ sudo service heketi status
 ```
 
-* In a separete console, load the topology configuration into Heketi using the client:
+* Now load the topology
 
 ```
-$ vagrant ssh storage0
-$ cd heketi
 $ export HEKETI_CLI_SERVER=http://localhost:8080
-$ ./heketi-cli load -json=topology_<provider>.json
+$ heketi-cli load -json=topology_<provider>.json
 ```
 
 Where _provider_ is either `virtualbox` or `libvirt` depending on the vagrant provider.
@@ -36,7 +35,7 @@ Heketi REST API has been created to be consumed by services like OpenStack Manil
 To create a 100GiB Replica 3 volume execute the following:
 
 ```
-$ ./heketi-cli volume create -size=100
+$ heketi-cli volume create -size=100
 ```
 
 # More information

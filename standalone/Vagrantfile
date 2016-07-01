@@ -21,12 +21,12 @@ Vagrant.configure("2") do |config|
         client.vm.network :private_network, ip: "192.168.10.90"
         client.vm.host_name = "client"
         client.vm.provider :virtualbox do |vb|
-            vb.memory = 1024
+            vb.memory = 512
             vb.cpus = 2
         end
 
         client.vm.provider :libvirt do |lv|
-            lv.memory = 1024
+            lv.memory = 512
             lv.cpus = 2
         end
 
