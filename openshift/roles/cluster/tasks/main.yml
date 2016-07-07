@@ -13,7 +13,3 @@
 - name: save iptables
   command: service iptables save
 
-- name: upgrade atomic
-  command: atomic host upgrade
-  ignore_errors: yes
-
