@@ -11,18 +11,15 @@ This vagrant-ansible script creates an setup for Heketi to manage containerized 
 
 * For Libvirt type: `sudo ./up.sh --provider=libvirt`
 
-* Now load the topology
+* Log into the client and get the status of the cluster
 
 ```
-$ sudo vagrant ssh storage0
-$ export HEKETI_CLI_SERVER=http://heketi-default.cloudapps.example.com
+$ sudo vagrant ssh client
+[vagrant@client]$ oc status
 ```
 
 # Usage
-Heketi REST API has been created to be consumed by services like OpenStack Manila, Kubernetes, OpenShift, and others.  For simplicity, a command line tool has been provided for use.
+Now you can setup an application to use the storage:
 
 Follow the [Usage Example](https://github.com/heketi/heketi/wiki/OpenShift-Integration---Project-Aplo#usage-example)
 
-# More information
-* See the command line help screen by typing: `./heketi-cli -h`
-* Please see the [API](https://github.com/heketi/heketi/wiki/API) for REST commands.
