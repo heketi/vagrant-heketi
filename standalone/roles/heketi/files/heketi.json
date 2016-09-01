@@ -27,8 +27,9 @@
 		"db" : "/var/lib/heketi/heketi.db",
 
 		"sshexec" : {
-            "keyfile" : "/etc/heketi/insecure_private_key",
-            "user" : "vagrant"
-        }
+			"keyfile" : "/etc/heketi/insecure_private_key",
+			"user" : "vagrant",
+			"sudo" : true
+		}
 	}
 }
