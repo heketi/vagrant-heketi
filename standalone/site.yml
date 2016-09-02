@@ -1,19 +1,19 @@
 - hosts: all
-  sudo: True
+  become: True
   roles:
     - common
 
 - hosts: client
-  sudo: True
+  become: True
   roles:
     - gluster_client
 
 - hosts: gluster
-  sudo: True
+  become: True
   roles:
     - gluster
 
 - hosts: heketi
-  sudo: True
+  become: True
   roles:
     - heketi
