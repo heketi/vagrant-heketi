@@ -1,11 +1,11 @@
 # GlusterFS converged with OpenShift Demo
 
-This vagrant-ansible script creates an setup for Heketi to manage containerized GlusterFS deployed in OpenShift.  It creates five VMs (client, master, atomic0, atomic1, atomic2) with three drives each.  The ansible script only installs OpenShift on the master and atomic systems, then deploys GlusterFS containers and Heketi into the cluster.
+This vagrant-ansible script creates a setup for Heketi to manage containerized GlusterFS deployed in OpenShift.  It creates five VMs (client, master, atomic0, atomic1, atomic2) with three drives each.  The ansible script only installs OpenShift on the master and atomic systems, then deploys GlusterFS containers and Heketi into the cluster.
 
 # Requisites
 
 * You will need libvirt, Vagrant, and Ansible installed on your system.
-* 12 GB of RAM of more
+* 12 GB of RAM or more
 
 # Setup
 
