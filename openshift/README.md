@@ -10,6 +10,8 @@ This vagrant-ansible script creates a setup for Heketi to manage containerized G
 # Setup
 
 * For Libvirt type: `sudo ./up.sh --provider=libvirt`
+Note: For all subsequent operations, use vagrant commands like `vagrant halt` and
+`vagrant up` instead of `up.sh`. The provisioner is not idempotent.
 
 * Log into the client and get the status of the cluster
 
