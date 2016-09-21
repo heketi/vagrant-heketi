@@ -11,9 +11,7 @@
     - bridge-utils 
     - bash-completion
     - dnsmasq
-
-- name: enable copr fedora heketi repo 
-  get_url: url=https://copr.fedorainfracloud.org/coprs/lpabon/Heketi/repo/epel-7/lpabon-Heketi-epel-7.repo dest=/etc/yum.repos.d/lpabon-Heketi-epel-7.repo mode=0644
+    - ncurses-term
 
 - name: install ansible and Heketi utilities
   yum: name={{ item }} state=present
@@ -23,8 +21,8 @@
     - heketi-client
     - heketi-templates
 
-- name: get openshift-ansible
-  git: repo=https://github.com/openshift/openshift-ansible dest=/home/vagrant/openshift-ansible version=enterprise-3.3
+- name: get openshift-ansible release 1.3
+  git: repo=https://github.com/openshift/openshift-ansible dest=/home/vagrant/openshift-ansible version=3cc5b0562de1b8a2334104542c15a6cce67b68bf
 
 - name: copy hosts.conf
   copy: src=hosts.conf dest=/home/vagrant force=yes mode=0644
