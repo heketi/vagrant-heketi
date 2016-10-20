@@ -1,6 +1,3 @@
-- name: enable copr fedora heketi repo 
-  get_url: url=https://copr.fedorainfracloud.org/coprs/lpabon/Heketi/repo/epel-7/lpabon-Heketi-epel-7.repo dest=/etc/yum.repos.d/lpabon-Heketi-epel-7.repo mode=0644
-
 - name: install ansible and Heketi utilities
   yum: name={{ item }} state=present
   with_items:
