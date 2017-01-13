@@ -42,6 +42,9 @@
 - name: make rc.local executable
   file: path=/etc/rc.d/rc.local mode="a+x"
 
+- name: update resolv.conf
+  command: /etc/rc.local
+
 - name: get oc client
   unarchive: src=https://github.com/openshift/origin/releases/download/v1.3.0/openshift-origin-client-tools-v1.3.0-3ab7af3d097b57f933eccef684a714f2368804e7-linux-64bit.tar.gz dest=/home/vagrant copy=no
 
