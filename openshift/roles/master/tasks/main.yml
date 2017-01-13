@@ -7,6 +7,9 @@
 - name: setup deployer privileges
   command: /usr/local/bin/oadm policy add-scc-to-user privileged -z default
 
+- name: setup heketi privileges
+  command: /usr/local/bin/oadm policy add-scc-to-user privileged -z heketi-service-account
+
 - name: deploy a router
   command: /usr/local/bin/oadm router --replicas=3 --service-account=router --credentials=/etc/origin/master/openshift-router.kubeconfig
 
