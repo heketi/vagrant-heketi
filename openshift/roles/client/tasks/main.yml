@@ -13,10 +13,18 @@
     - dnsmasq
     - ncurses-term
 
+- name: Add paas SIG repository
+  yum_repository:
+    name: paas-openshift-origin
+    description: PaaS openshift-origin repo
+    baseurl: http://mirror.centos.org/centos/7/paas/x86_64/openshift-origin/
+    gpgkey: https://raw.githubusercontent.com/openshift/openshift-ansible/master/roles/openshift_repos/files/origin/gpg_keys/openshift-ansible-CentOS-SIG-PaaS
+    gpgcheck: yes
+
 - name: install ansible and Heketi utilities
   yum: name={{ item }} state=present
   with_items:
-    - ansible
+    - ansible-2.2.1.0-2.el7
     - pyOpenSSL
     - heketi-client
     - heketi-templates
