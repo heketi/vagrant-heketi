@@ -22,7 +22,7 @@
     - heketi-templates
 
 - name: get openshift-ansible release 1.3
-  git: repo=https://github.com/openshift/openshift-ansible dest=/home/vagrant/openshift-ansible version=3cc5b0562de1b8a2334104542c15a6cce67b68bf
+  git: repo=https://github.com/openshift/openshift-ansible dest=/home/vagrant/openshift-ansible version=release-1.3
 
 - name: copy hosts.conf
   copy: src=hosts.conf dest=/home/vagrant force=yes mode=0644
@@ -41,6 +41,9 @@
 
 - name: make rc.local executable
   file: path=/etc/rc.d/rc.local mode="a+x"
+
+- name: update resolv.conf
+  command: /etc/rc.local
 
 - name: get oc client
   unarchive: src=https://github.com/openshift/origin/releases/download/v1.3.0/openshift-origin-client-tools-v1.3.0-3ab7af3d097b57f933eccef684a714f2368804e7-linux-64bit.tar.gz dest=/home/vagrant copy=no

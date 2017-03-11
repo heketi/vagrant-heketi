@@ -13,3 +13,8 @@
 - name: save iptables
   command: service iptables save
 
+- name: Pull GlusterFS Docker image
+  command: docker pull gluster/gluster-centos:latest
+
+- name: Pull heketi Docker image
+  command: docker pull heketi/heketi:dev

@@ -7,6 +7,9 @@
 - name: setup deployer privileges
   command: /usr/local/bin/oadm policy add-scc-to-user privileged -z default
 
+- name: setup heketi privileges
+  command: /usr/local/bin/oadm policy add-scc-to-user privileged -z heketi-service-account
+
 - name: deploy a router
   command: /usr/local/bin/oadm router --replicas=3 --service-account=router --credentials=/etc/origin/master/openshift-router.kubeconfig
 
@@ -20,4 +23,4 @@
   wait_for: host=192.168.10.90 port=8443 state=started timeout=600
 
 - name: wait for router in 192.168.10.100
-  wait_for: host=192.168.10.100 port=80 state=started
+  wait_for: host=192.168.10.100 port=80 state=started timeout=600
