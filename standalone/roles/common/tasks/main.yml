@@ -8,7 +8,6 @@
   with_items:
     - python-setuptools
     - python3-setuptools
-    - python-pip
     - python3-pip
     - tmux
     - wget
