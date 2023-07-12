@@ -1,10 +1,26 @@
+- name: upgrade all packages
+  yum: name=* state=latest
+
+
+
 - name: install packages
   yum: name={{ item }} state=present
   with_items:
+    - python-setuptools
+    - python3-setuptools
+    - python3-pip
+    - tmux
     - wget
     - screen
     - epel-release
     - centos-release-gluster
+
+#- name: pip self-update
+#  pip:
+#    name: pip3
+#    state: latest
+- name: Update Pip
+  ansible.builtin.command: pip3 install --upgrade pip
 
 - name: copy private key
   copy: src=insecure_private_key owner=vagrant group=vagrant dest=/home/vagrant/.ssh/id_rsa force=no mode=0600

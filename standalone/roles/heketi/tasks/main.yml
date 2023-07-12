@@ -4,7 +4,9 @@
     - heketi-client
     - heketi-templates
     - heketi
-    - python-heketi
+
+- name: Install python heketi
+  ansible.builtin.command: pip3 install heketi
 
 - name: copy private key
   copy: src=insecure_private_key owner=heketi group=heketi dest=/etc/heketi force=yes mode=600
